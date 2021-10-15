@@ -1,0 +1,121 @@
+bash -v testing.sh
+#!/bin/bash
+
+# testing.sh - testing the crawler module
+
+# Compiling common
+cd ../common
+make clean
+make[1]: Entering directory '/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/common'
+rm -f core
+rm -f common.a *~ *.o
+make[1]: Leaving directory '/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/common'
+make
+make[1]: Entering directory '/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/common'
+gcc -Wall -pedantic -std=c11 -ggdb -I ../libcs50   -c -o pagedir.o pagedir.c
+ar cr common.a pagedir.o ../libcs50/libcs50-given.a
+make[1]: Leaving directory '/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/common'
+
+# Compiling crawler
+cd -
+/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/crawler
+make clean
+make[1]: Entering directory '/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/crawler'
+rm -f core *core.*
+rm -f crawler *~ *.o
+make[1]: Leaving directory '/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/crawler'
+make
+make[1]: Entering directory '/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/crawler'
+gcc -Wall -pedantic -std=c11 -ggdb -I ../common -I ../libcs50   -c -o crawler.o crawler.c
+gcc -Wall -pedantic -std=c11 -ggdb -I ../common -I ../libcs50 crawler.o ../libcs50/libcs50-given.a ../common/common.a -o crawler
+make[1]: Leaving directory '/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/crawler'
+
+# Variables
+testURL=http://cs50tse.cs.dartmouth.edu/tse/
+externalURL=www.google.com
+out=output  # name of directory
+
+# remove output directory if it exists
+if [ -d $out ]
+then
+    rm -rf $out/
+fi
+
+# make the directory and test subdirectory
+mkdir $out
+mkdir $out/test
+
+# 1 argument
+./crawler
+usage: seedURL pageDirectory maxDepth
+
+# 2 arguments
+./crawler $testURL  
+usage: seedURL pageDirectory maxDepth
+
+# 3 arguments
+./crawler $testURL $out/test 
+usage: seedURL pageDirectory maxDepth
+
+# 4 arguments + externalURL
+./crawler $externalURL $out/test 2 
+Invalid seedUrl.
+
+# non existent server
+./crawler http://cs50tse.cs.dartmouth.gov $out 0
+Invalid seedUrl.
+
+# non existent page
+./crawler $testURL/index $out/test 2 
+
+# negative maxDepth
+./crawler $testURL $out -7
+maxDepth has to be > 0.
+
+# cross-linked webpage - letters
+testURL=http://cs50tse.cs.dartmouth.edu/tse/letters/index.html
+depth=0
+
+while [ $depth -lt 7 ]
+do 
+    dir=letters-depth-$depth
+
+    # make directory to store output files
+    mkdir $out/$dir
+    ./crawler $testURL $out/$dir $depth 
+    ((depth++))
+done
+
+# different seedURl
+testURL=http://cs50tse.cs.dartmouth.edu/tse/letters/A.html
+./crawler $testURL $out/test 2
+
+
+# wikipedia playground
+testURL=http://cs50tse.cs.dartmouth.edu/tse/wikipedia/
+depth=0
+
+while [ $depth -lt 3 ]
+do
+    dir=wikipedia-depth-$depth
+    # make direcrory to store output files
+    mkdir $out/$dir
+    ./crawler $testURL $out/$dir $depth
+    ((depth++))
+done
+
+# clean
+make clean
+make[1]: Entering directory '/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/crawler'
+rm -f core *core.*
+rm -f crawler *~ *.o
+make[1]: Leaving directory '/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/crawler'
+cd -
+/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/common
+make clean
+make[1]: Entering directory '/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/common'
+rm -f core
+rm -f common.a *~ *.o
+make[1]: Leaving directory '/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/common'
+cd -
+/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/crawler

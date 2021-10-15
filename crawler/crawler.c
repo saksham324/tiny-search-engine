@@ -23,13 +23,12 @@ int main(const int argc, char *argv[]){
     char *seedUrl; 
     int maxDepth;
     char pageDirectory[50];
-    char* program = argv[0];  // program name
     int id = 1; 
   
 
 	// check input arguments: # of arguments
 	if (argc != 4) {
-		fprintf(stderr, "usage: %s seedURL pageDirectory maxDepth\n", program);
+		fprintf(stderr, "usage: seedURL pageDirectory maxDepth\n");
 		return 1; 
 	}
 
@@ -70,7 +69,7 @@ int main(const int argc, char *argv[]){
 
     // add seedUrl to ht of seen urls
     hashtable_insert(urlSeen, seedUrl, ""); 
-    
+        
     // define webpage last extracted from bag
     webpage_t *lastExtracted; 
 

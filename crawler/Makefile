@@ -25,4 +25,4 @@ clean:
 	rm -f $(PROG) *~ *.o
 
 valgrind:
-	valgrind ./crawler http://cs50tse.cs.dartmouth.edu/tse/ output/letters-depth-5 5
+	valgrind ./crawler http://cs50tse.cs.dartmouth.edu/tse/ output/letters-depth-1 1

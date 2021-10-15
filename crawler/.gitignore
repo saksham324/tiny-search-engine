@@ -1,0 +1,5 @@
+output
+crawler
+*.o
+core 
+.nfs*

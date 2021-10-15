@@ -2,13 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include "pagedir.h"
+#include "../libcs50/webpage.h"
+#include "../libcs50/memory.h"
+#include "../libcs50/file.h"
 
 // function prototypes
-bool isValidDirectory(char * dirname);
-bool pageSaver(webpage_t* page, char * dirname, const int id);
+// bool validateDirectory(char * dirname);
+// bool pageSaver(webpage_t* page, char *pageDir, const int id);
 
-
-bool validateDirectory(char * pageDir)
+bool validateDirectory(char *pageDir)
 {
     // name of the file (.crawler or ./crawler depending on the formatting)
     char filename[11 + strlen(pageDir)];
@@ -41,8 +43,7 @@ bool validateDirectory(char * pageDir)
 
 
 // saves a page in the directory specified by pageDir with a file name of id
-bool pageSaver(webpage_t* page, char * pageDir, const int id)
-{
+bool pageSaver(webpage_t* page, char* pageDir, const int id){
     bool status; // have we successfully saved the page?
     char filename[strlen(pageDir) + 5];
     strcpy(filename, pageDir);
@@ -67,10 +68,9 @@ bool pageSaver(webpage_t* page, char * pageDir, const int id)
     }
     // if the file was successfully created, start writing into it.
     else {
-        fprintf(fp, webpage_getURL(page));
-        fprintf(fp, "\n");
+        fprintf(fp, "%s\n", webpage_getURL(page));
         fprintf(fp, "%d\n", webpage_getDepth(page));
-        fprintf(fp, webpage_getHTML(page));
+        fprintf(fp, "%s\n", webpage_getHTML(page));
         fclose(fp);
         status = true;
     }
