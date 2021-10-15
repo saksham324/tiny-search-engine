@@ -14,8 +14,8 @@
 
 // function prototypes 
 bool pageFetcher(webpage_t *page); 
-void pageSaver(webpage_t* page, char* dirName, int id);
 void url_delete(void *url);  
+void pageScanner(webpage_t *page, bag_t *bag, hashtable_t *ht); 
 
 int main(const int argc, char *argv[]){
 
@@ -52,7 +52,7 @@ int main(const int argc, char *argv[]){
 
     // validating directory
     strcpy(pageDirectory, argv[2]);
-    if (!isValidDirectory(argv[2])) {
+    if (!validateDirectory(argv[2])) {
         return 4;
     }
 
@@ -60,7 +60,7 @@ int main(const int argc, char *argv[]){
     bag_t *pagesToCrawl = bag_new();
 
     // define hashtable for seen urls
-    hashtable_t *urlSeen = hastable_new(200);
+    hashtable_t *urlSeen = hashtable_new(200);
 
     // define seed page from seedUrl
     webpage_t *seedPage = webpage_new(seedUrl, 0, NULL); 
