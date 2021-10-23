@@ -6,11 +6,11 @@
 #include <stdbool.h>
 #include <string.h>
 #include "pagedir.h"
-#include "hashtable.h"
-#include "webpage.h"
-#include "memory.h"
-#include "index.h"
-#include "file.h"
+#include "../libcs50/hashtable.h"
+#include "../libcs50/webpage.h"
+#include "../libcs50/memory.h"
+#include "../common/index.h"
+#include "../libcs50/file.h"
 
 // deletes the counters
 void delete(void* item);

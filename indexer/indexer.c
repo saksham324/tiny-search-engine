@@ -9,9 +9,9 @@
 #include "../common/pagedir.h"
 #include "../libcs50/hashtable.h"
 #include "../libcs50/webpage.h"
-#include "memory.h"
+#include "../libcs50/memory.h"
 #include "dirent.h"
-#include "index.h"
+#include "../common/index.h"
 
 int main(const int argc, char *argv[])
 {
