@@ -27,6 +27,7 @@ test2=./test2
 ./indexer $pagedir1 $index1 $index2
 
 
+
 #letters-depth-6
 ./indexer $pagedir1 $index1
 
@@ -80,6 +81,3 @@ make clean
 cd -
 make clean
 cd -
-
-
-

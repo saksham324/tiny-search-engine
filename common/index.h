@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 #include "pagedir.h"
 #include "../libcs50/hashtable.h"
 #include "../libcs50/counters.h"
 #include "../libcs50/webpage.h"
 #include "../libcs50/memory.h"
-#include "word.h"
+#include "../common/word.h"
 
 // builds the inverted-index data structure and writes it into a file
 void writeIndex(FILE *indexFile, char *pageDirectory);

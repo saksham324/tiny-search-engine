@@ -103,19 +103,5 @@ do
     ./crawler $testURL $out/$dir $depth
     ((depth++))
 done
-
-# clean
-make clean
-make[1]: Entering directory '/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/crawler'
-rm -f core *core.*
-rm -f crawler *~ *.o
-make[1]: Leaving directory '/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/crawler'
-cd -
-/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/common
-make clean
-make[1]: Entering directory '/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/common'
-rm -f core
-rm -f common.a *~ *.o
-make[1]: Leaving directory '/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/common'
-cd -
-/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/crawler
+Makefile:21: recipe for target 'test' failed
+make: *** [test] Interrupt

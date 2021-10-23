@@ -4,31 +4,27 @@ M = ../common
 
 CC = gcc
 CFLAGS = -Wall -pedantic -std=c11 -ggdb -I $M -I $L
-PROG1 = indexer
-PROG2 = indextest
-OBJS1 = indexer.o
-OBJS2 = indextest.o
-LLIBS = $L/libcs50-given.a $M/common.a
+LLIBS = $M/common.a $L/libcs50-given.a 
 
-# Rules
-all: $(PROG1) $(PROG2)
+all: indexer indextest
 
-$(PROG1): $(OBJS1) $(LLIBS)
-	$(CC) $(CFLAGS) $(OBJS1) -o $(PROG1)
+indexer: indexer.o
+	$(CC) $(CFLAGS) $^ $(LLIBS) -o $@
 
-$(PROG2): $(OBJS2) $(LLIBS)
-	$(CC) $(CFLAGS) $(OBJS2) -o $(PROG2)
+indextest: indextest.o
+	$(CC) $(CFLAGS) $^ $(LLIBS) -o $@
 
 # Phony Targets
-.PHONY: clean test
-
-test:
-	bash -v testing.sh
+.PHONY: clean test valgrind
 
 clean:
 	rm -f core *core.*
-	rm -f $(PROG1) $(PROG2) *~ *.o
+	rm -f indexer indextest *~ *.o
+
+test: 
+	bash -v testing.sh
 
 valgrind:
-	valgrind ./indexer
-	valgrind ./indextest 
+	valgrind ./indexer ../crawler/output/letters-depth-6 ./indexout
+	valgrind ./indextest ./indexout ./new
+	rm -f indexout new

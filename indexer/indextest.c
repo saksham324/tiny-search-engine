@@ -1,11 +1,7 @@
-/* 
-* indextest.c
-*
-*/
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
-#include "pagedir.h"
+#include "../common/pagedir.h"
 #include "../libcs50/hashtable.h"
 #include "../libcs50/webpage.h"
 #include "../libcs50/memory.h"
@@ -15,10 +11,11 @@
 // deletes the counters
 void delete(void* item);
 
-int main(const int argc, char *argv[]) {
+int main(const int argc, char *argv[])
+{
     // validating number of arguments
     if (argc != 3){
-        fprintf(stderr, "usage: ./indextest oldIndexFilename newIndexFilename\n");
+        fprintf(stderr, "usage: /indextest oldIndexFilename newIndexFilename\n");
         return 1;
     }
     // inverted data structure

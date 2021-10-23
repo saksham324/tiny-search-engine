@@ -1,33 +1,35 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <string.h>
-#include "pagedir.h"
 #include "../libcs50/webpage.h"
 #include "../libcs50/memory.h"
 #include "../libcs50/file.h"
 
 // function prototypes
-// bool validateDirectory(char * dirname);
-// bool pageSaver(webpage_t* page, char *pageDir, const int id);
+bool isValidDirectory(char * dirname);
+bool pageSaver(webpage_t* page, char * dirname, const int id);
 
-bool validateDirectory(char *pageDir)
+
+// checks if the given directory is valid by writing a file called .crawler into the directory
+bool isValidDirectory(char * dirname)
 {
-    // name of the file (.crawler or ./crawler depending on the formatting)
-    char filename[11 + strlen(pageDir)];
-    strcpy(filename, pageDir);
-    char *extension;
+    // the name of the file (.crawler or ./crawler depending on the formatting)
+    char filename[11 + strlen(dirname)];
+    strcpy(filename, dirname);
+    char *ext;
 
-    // user can give directory as either pageDir/ or pageDir
-    if (pageDir[strlen(pageDir) - 1] != '/'){
-        extension = "/.crawler";
-        strcat(filename, extension);
+    // user can give directory as either dirname/ or dirname
+    if (dirname[strlen(dirname) - 1] != '/'){
+        ext = "/.crawler";
+        strcat(filename, ext);
     }
     else {
-        extension = ".crawler";
-        strcat(filename, extension);
+        ext = ".crawler";
+        strcat(filename, ext);
     } 
 
-    // open the file
+    // opening the file
     FILE * fp = fopen(filename, "w");
 
     // if a valid fp is returned, the directory is valid.
@@ -41,14 +43,14 @@ bool validateDirectory(char *pageDir)
     }
 }
 
-
-// saves a page in the directory specified by pageDir with a file name of id
-bool pageSaver(webpage_t* page, char* pageDir, const int id){
+// saves a page in the directory specified by dirname with a file name of id
+bool pageSaver(webpage_t* page, char * dirname, const int id)
+{
     bool status; // have we successfully saved the page?
-    char filename[strlen(pageDir) + 5];
-    strcpy(filename, pageDir);
+    char filename[strlen(dirname) + 5];
+    strcpy(filename, dirname);
     // if the filename does not end with a '/', concatenate it
-    if (pageDir[strlen(pageDir) - 1] != '/') {
+    if (dirname[strlen(dirname) - 1] != '/') {
         strcat(filename, "/");
     }
 
@@ -68,9 +70,10 @@ bool pageSaver(webpage_t* page, char* pageDir, const int id){
     }
     // if the file was successfully created, start writing into it.
     else {
-        fprintf(fp, "%s\n", webpage_getURL(page));
+        fprintf(fp, webpage_getURL(page));
+        fprintf(fp, "\n");
         fprintf(fp, "%d\n", webpage_getDepth(page));
-        fprintf(fp, "%s\n", webpage_getHTML(page));
+        fprintf(fp, webpage_getHTML(page));
         fclose(fp);
         status = true;
     }
@@ -93,6 +96,3 @@ webpage_t *loadPage(char *pathname){
     }
     return NULL;
 }
-
-
-
