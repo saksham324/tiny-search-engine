@@ -3,10 +3,10 @@
 #include <string.h>
 #include <stdlib.h>
 #include "pagedir.h"
-#include "hashtable.h"
-#include "counters.h"
-#include "webpage.h"
-#include "memory.h"
+#include "../libcs50/hashtable.h"
+#include "../libcs50/counters.h"
+#include "../libcs50/webpage.h"
+#include "../libcs50/memory.h"
 #include "word.h"
 
 // builds the inverted-index data structure and writes it into a file

@@ -11,3 +11,6 @@ bool validateDirectory(char* pageDir);
 
 // saves a webpage
 bool pageSaver(webpage_t* page, char* pageDir, const int id);
+
+// loads a file creted by crawler into a webpage
+webpage_t *loadPage(char *pathname);
