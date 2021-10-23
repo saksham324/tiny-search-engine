@@ -8,6 +8,7 @@
 #include "../libcs50/webpage.h"
 #include "../libcs50/memory.h"
 #include "word.h"
+
 // function prototypes
 void writeIndex(FILE *indexFile, char *pageDirectory);
 void writeWord(void *arg, const char *key, void *item);
