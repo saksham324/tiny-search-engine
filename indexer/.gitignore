@@ -1,0 +1,6 @@
+*.o
+indexer
+indextest
+*core*
+.nfs*
+*depth*
