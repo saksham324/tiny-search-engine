@@ -1,7 +1,7 @@
 *.o
 indexer
 indextest
-.out
+*.out
 *core*
 .nfs*
 *depth*
