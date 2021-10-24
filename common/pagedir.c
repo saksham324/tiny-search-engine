@@ -70,10 +70,9 @@ bool pageSaver(webpage_t* page, char * dirname, const int id)
     }
     // if the file was successfully created, start writing into it.
     else {
-        fprintf(fp, webpage_getURL(page));
-        fprintf(fp, "\n");
+        fprintf(fp, "%s\n", webpage_getURL(page));
         fprintf(fp, "%d\n", webpage_getDepth(page));
-        fprintf(fp, webpage_getHTML(page));
+        fprintf(fp, "%s\n", webpage_getHTML(page));
         fclose(fp);
         status = true;
     }

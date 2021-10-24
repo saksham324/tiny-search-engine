@@ -13,7 +13,9 @@ make[1]: Leaving directory '/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/
 make
 make[1]: Entering directory '/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/common'
 gcc -Wall -pedantic -std=c11 -ggdb -I ../libcs50   -c -o pagedir.o pagedir.c
-ar cr common.a pagedir.o ../libcs50/libcs50-given.a
+gcc -Wall -pedantic -std=c11 -ggdb -I ../libcs50   -c -o index.o index.c
+gcc -Wall -pedantic -std=c11 -ggdb -I ../libcs50   -c -o word.o word.c
+ar cr common.a pagedir.o index.o word.o ../libcs50/libcs50-given.a
 make[1]: Leaving directory '/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/common'
 
 # Compiling crawler
@@ -28,45 +30,39 @@ make
 make[1]: Entering directory '/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/indexer'
 gcc -Wall -pedantic -std=c11 -ggdb -I ../common -I ../libcs50   -c -o indexer.o indexer.c
 gcc -Wall -pedantic -std=c11 -ggdb -I ../common -I ../libcs50 indexer.o ../common/common.a ../libcs50/libcs50-given.a  -o indexer
-indexer.o: In function `main':
-/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/indexer/indexer.c:65: undefined reference to `writeIndex'
-collect2: error: ld returned 1 exit status
-Makefile:12: recipe for target 'indexer' failed
-make[1]: *** [indexer] Error 1
+gcc -Wall -pedantic -std=c11 -ggdb -I ../common -I ../libcs50   -c -o indextest.o indextest.c
+gcc -Wall -pedantic -std=c11 -ggdb -I ../common -I ../libcs50 indextest.o ../common/common.a ../libcs50/libcs50-given.a  -o indextest
 make[1]: Leaving directory '/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/indexer'
 
 # Variables
 pagedir1=../crawler/output/letters-depth-6
 pagedir2=../crawler/output/wikipedia-depth-1
-index1=./letters-depth-6-index
-index2=./wikipedia-depth-1-index
-test1=./test1
-test2=./test2
+index1=letters-depth-6-index
+index2=wikipedia-depth-1-index
+test1=test1
+test2=test2
 
 # wrong pageDirectory
 ./indexer ../crawler $index1
-testing.sh: line 24: ./indexer: No such file or directory
+Invalid pageDirectory.
 
 # wrong number of arguments
 ./indexer $pagedir1 $index1 $index2
-testing.sh: line 27: ./indexer: No such file or directory
+usage ./indexer pageDirectory indexFilename
+
 
 
 #letters-depth-6
 ./indexer $pagedir1 $index1
-testing.sh: line 31: ./indexer: No such file or directory
 
 # sorting index file
 gawk -f indexsort.awk $index1 > $index1.sorted
-gawk: fatal: cannot open file `./letters-depth-6-index' for reading (No such file or directory)
 
 # reloading the index file
 ./indextest $index1 $test1
-testing.sh: line 37: ./indextest: No such file or directory
 
 # sorting the reloaded index file
 gawk -f indexsort.awk $test1 > $test1.sorted
-gawk: fatal: cannot open file `./test1' for reading (No such file or directory)
 
 # comparing the loaded and reloaded index files
 diff -q $test1.sorted $index1.sorted
@@ -84,19 +80,15 @@ no differences
 
 # wikipedia-depth-1
 ./indexer $pagedir2 $index2
-testing.sh: line 56: ./indexer: No such file or directory
 
 # sorting index file
 gawk -f indexsort.awk $index2 > $index2.sorted
-gawk: fatal: cannot open file `./wikipedia-depth-1-index' for reading (No such file or directory)
 
 # reloading the index file
 ./indextest $index2 $test2
-testing.sh: line 62: ./indextest: No such file or directory
 
 # sorting the reloaded index file
 gawk -f indexsort.awk $test2 > $test2.sorted
-gawk: fatal: cannot open file `./test2' for reading (No such file or directory)
 
 # comparing the loaded and reloaded index files
 diff -q $test2.sorted $index2.sorted
@@ -125,6 +117,3 @@ rm -f common.a *~ *.o
 make[1]: Leaving directory '/thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/common'
 cd -
 /thayerfs/home/f0042mm/cs50-dev/labs/tse-saksham324/indexer
-
-
-

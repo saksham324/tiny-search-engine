@@ -14,11 +14,11 @@ make
 
 # Variables
 pagedir1=../crawler/output/letters-depth-6
-pagedir2=../crawler/output/wikipedia.-depth-1
-index1=./letters-depth-6-index
-index2=./wikipedia-depth-1-index
-test1=./test1
-test2=./test2
+pagedir2=../crawler/output/wikipedia-depth-1
+index1=letters-depth-6-index
+index2=wikipedia-depth-1-index
+test1=test1
+test2=test2
 
 # wrong pageDirectory
 ./indexer ../crawler $index1
