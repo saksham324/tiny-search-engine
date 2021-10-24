@@ -83,6 +83,12 @@ void writeIndex(FILE *indexFile, char *pageDirectory)
     }
     hashtable_iterate(index, indexFile, writeWord);
     hashtable_delete(index, ctrsdelete);
+
+    #ifdef MEM_TEST
+    /////////////////////////////////////
+    // check memory status
+    count_report(stdout, "End of index_delete");
+    #endif
 }
 
 
@@ -123,3 +129,4 @@ void ctrsdelete(void* item)
         counters_delete(ctrs);
     }
 }
+
