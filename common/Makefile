@@ -13,6 +13,8 @@ $(LIB): $(OBJS) $(LLIBS)
 	ar cr $(LIB) $^
 
 pagedir.o: pagedir.h
+index.o: index.h
+word.o: word.h
 
 # Phony Targets
 .PHONY: clean

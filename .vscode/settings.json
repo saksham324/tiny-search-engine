@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "hashtable.h": "c",
+        "counters.h": "c",
+        "webpage.h": "c",
+        "memory.h": "c",
+        "file.h": "c",
+        "bag.h": "c"
+    }
+}

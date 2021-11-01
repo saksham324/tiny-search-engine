@@ -1,6 +1,6 @@
 # Saksham Arora
 ## CS50 Fall 2021, Tiny Search Engine
-### Lab 5 Submission
+### Lab 6 Submission
 
 GitHub username: saksham324
 
