@@ -42,6 +42,10 @@ $fuzz $index 21 0 | $cc $pagedir $index
 
 $fuzz $index1 16 2 | $cc $pagedir1 $index1
 
+# valgrind 
+echo review home | valgrind ./querier ../tse-output/toscrape-depth-1 ../indexer/toscrape-index-1
+ 
+
 
 
 
