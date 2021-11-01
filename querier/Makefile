@@ -3,28 +3,26 @@ L = ../libcs50
 M = ../common
 
 CC = gcc
-CFLAGS = -Wall -pedantic -std=c11 -ggdb -I $M -I $L
+CFLAGS = -Wall -pedantic -std=gnu11 -ggdb -I $M -I $L
 LLIBS = $M/common.a $L/libcs50-given.a 
 
-all: querier
+all: querier fuzzquery
 
 querier: querier.o
 	$(CC) $(CFLAGS) $^ $(LLIBS) -o $@
 
-# indextest: indextest.o
-# 	$(CC) $(CFLAGS) $^ $(LLIBS) -o $@
+fuzzquery: fuzzquery.o
+	$(CC) $(CFLAGS) $^ $(LLIBS) -o $@
 
 # Phony Targets
 .PHONY: clean test valgrind
 
 clean:
 	rm -f core *core.*
-	rm -f indexer indextest *~ *.o
+	rm -f querier fuzzquery *~ *.o
 
 test: 
 	bash -v testing.sh
 
-# valgrind:
-# 	valgrind ./indexer ../crawler/output/letters-depth-6 ./indexout
-# 	valgrind ./indextest ./indexout ./new
-# 	rm -f indexout new
+valgrind:
+	echo review home | valgrind ./querier ../tse-output/toscrape-depth-1 ../indexer/toscrape-depth-1-index
