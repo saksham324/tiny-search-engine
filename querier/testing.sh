@@ -12,7 +12,7 @@ cd -
 cc=./querier
 fuzz=./fuzzquery
 pagedir=../tse-output/toscrape-depth-1
-index=../indexer/toscrape-depth-1-index
+index=../tse-output/toscrape-index-1
 
 # wrong pageDirectory
 $cc ../crawler $index
