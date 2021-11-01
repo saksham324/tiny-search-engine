@@ -31,6 +31,7 @@ int min(int a, int b);                                      // returns minimum o
 int sum(int a, int b);                                      // returns sum of 2 integers
 void count(void *arg, const int key, const int count);      // counts items in a counters_t struct
 void sort(void *arg, const int key, const int count);       // inserts page_t structs into an array and sorts them
+char* parseString(char* query, const char* d); 
 
 
 // struct definitions
@@ -123,14 +124,15 @@ int main(const int argc, char *argv[]) {
         int i = 0; 
 
         // separating words by space and normalizing them
-        char* word = strtok(query, " ");
-        normalizeWord(word);
+        char* word2= parseString(query, " ");
 
-        while(word != NULL){
+        normalizeWord(word2);
+
+        while(word2 != NULL){
             // check for non-alphabetic characters in each word
-            for(int j = 0; j < strlen(word); j++){
-                if (isalpha(word[j]) == 0 && isspace(word[j]) == 0) {
-                    fprintf(stderr, "Error: bad character '%c' in query\n", word[j]);
+            for(int j = 0; j < strlen(word2); j++){
+                if (isalpha(word2[j]) == 0 && isspace(word2[j]) == 0) {
+                    fprintf(stderr, "Error: bad character '%c' in query\n", word2[j]);
                     success = false;
                     break;  // break out of the for loop if a non-alphabetic character is found
                 }
@@ -139,9 +141,9 @@ int main(const int argc, char *argv[]) {
                 break; // break out of the while loop if a non-alphabetic character is found
             }  
 
-            words[i] = word;  // store the word in the array of words
-            word = strtok(NULL, " ");
-            normalizeWord(word);
+            words[i] = word2;  // store the word in the array of words
+            word2 = parseString(NULL, " ");
+            normalizeWord(word2);
             i++;  
         }
 
@@ -317,6 +319,54 @@ int main(const int argc, char *argv[]) {
     }
     hashtable_delete(ht, itemdelete);
     return 0;
+}
+
+char *sp = NULL; 
+
+char* parseString(char* query, const char* d)
+{  
+    int i = 0;
+    int len = strlen(d);
+ 
+    /* initialize the sp during the first call */
+    if(query && !sp)
+        sp = query;
+ 
+    /* find the start of the substring, skip delimiters */
+    char* p_start = sp;
+    while(true) {
+        for(i = 0; i < len; i ++) {
+            if(*p_start == d[i]) {
+                p_start ++;
+                break;
+            }
+        }
+ 
+        if(i == len) {
+               sp = p_start;
+               break;
+        }
+    }
+ 
+    if(*sp == '\0') {
+        sp = NULL;
+        return sp;
+    }
+    
+    while(*sp != '\0') {
+        for(i = 0; i < len; i ++) {
+            if(*sp == d[i]) {
+                *sp = '\0';
+                break;
+            }
+        }
+
+        sp++;
+        if (i < len)
+            break;
+    }
+ 
+    return p_start;
 }
 
 // print a prompt iff stdin is a tty (terminal)
