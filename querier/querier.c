@@ -65,8 +65,9 @@ int main(const int argc, char *argv[]) {
         if (pageDirectory[strlen(pageDirectory) - 1] != '/'){
             strcat(pageDirectory, "/.crawler");
             strcat(directory, "/");
+        } else { 
+            strcat(pageDirectory, ".crawler"); 
         }
-        else { strcat(pageDirectory, ".crawler"); }
 
         FILE *fp = fopen(pageDirectory, "r");
 
@@ -77,8 +78,7 @@ int main(const int argc, char *argv[]) {
             return 1;
         }
         closedir(dir);
-    }
-    else {
+    } else {
         fprintf(stderr, "Invalid pageDirectory.\n");
         return 1;
     }
@@ -96,6 +96,21 @@ int main(const int argc, char *argv[]) {
         fprintf(stderr, "Error loading indexFile\n");
         return 2;
     }
+
+    #ifdef DEBUG
+    /*
+    * Print members of hashtable for debugging
+    */
+    static void PrintHT(hashtable_t *ht) {
+        FILE *fp = fopen(unittest, "r");
+        hashtable_print(ht, fp, fprintf); 
+    }
+    int main(){
+            PrintHT(ht); 
+            return 0; 
+        }
+    #endif
+
     prompt();
     char *query;
     bool success = true;
@@ -199,8 +214,24 @@ int main(const int argc, char *argv[]) {
         // bag of counters representing andsequences
         bag_t *andResults = bag_new();
 
+        #ifdef DEBUG 
+        /*
+        * Print contents of andResults for debugging
+        */
+        static void PrintBag(bag_t *bag){
+            FILE *fp = fopen(unittest, "r");
+            bag_print(bag, fp, fprintf);
+        }
+
+        int main(){
+            PrintBag(andResults); 
+            return 0; 
+        }
+        #endif
+
         // running product - intersection of everything seen so far
         counters_t *resAnd = counters_new();
+        
 
         // initialize the running product
         counters_iterate(hashtable_find(ht, words[0]), resAnd, copy);

@@ -25,6 +25,8 @@ cc=./querier
 fuzz=./fuzzquery
 pagedir=../tse-output/toscrape-depth-1
 index=../tse-output/toscrape-index-1
+pagedir1=../tse-output/wikipedia-depth-1
+index1=../tse-output/wikipedia-index-1
 
 # wrong pageDirectory
 $cc ../crawler $index
@@ -256,6 +258,66 @@ score  1 doc 61: http://old-www.cs.dartmouth.edu/~cs50/data/tse/toscrape/catalog
 score  1 doc 65: http://old-www.cs.dartmouth.edu/~cs50/data/tse/toscrape/catalogue/category/books/womens-fiction_9/index.html
 score  1 doc 66: http://old-www.cs.dartmouth.edu/~cs50/data/tse/toscrape/catalogue/category/books/romance_8/index.html
 score  1 doc 71: http://old-www.cs.dartmouth.edu/~cs50/data/tse/toscrape/catalogue/category/books/mystery_3/index.html
+-----------------------------------------------------------------------------------------------------------------------
+
+$fuzz $index1 16 2 | $cc $pagedir1 $index1
+./fuzzquery: generating 16 queries from 6506 words
+Error: bad character ''' in query
+Query: tastiness 
+Matches 0 documents (ranked)
+-----------------------------------------------------------------------------------------------------------------------
+Query: mcp roughly or endowment or linker or watchcreations activities 
+Matches 3 documents (ranked)
+score  3 doc  4: http://old-www.cs.dartmouth.edu/~cs50/data/tse/wikipedia/Dartmouth_College.html
+score  1 doc  5: http://old-www.cs.dartmouth.edu/~cs50/data/tse/wikipedia/Unix.html
+score  1 doc  6: http://old-www.cs.dartmouth.edu/~cs50/data/tse/wikipedia/C_(programming_language).html
+-----------------------------------------------------------------------------------------------------------------------
+Query: sunrisedd priorities or shotput 
+Matches 1 documents (ranked)
+score  1 doc  4: http://old-www.cs.dartmouth.edu/~cs50/data/tse/wikipedia/Dartmouth_College.html
+-----------------------------------------------------------------------------------------------------------------------
+Query: sized and aziz details funding 
+Matches 0 documents (ranked)
+-----------------------------------------------------------------------------------------------------------------------
+Query: luke 
+Matches 0 documents (ranked)
+-----------------------------------------------------------------------------------------------------------------------
+Query: brings water or contentious andrew or bingen stringent 
+Matches 0 documents (ranked)
+-----------------------------------------------------------------------------------------------------------------------
+Query: bifurcate and line 
+Matches 0 documents (ranked)
+-----------------------------------------------------------------------------------------------------------------------
+Query: oks and general war or undeclared or remained 
+Matches 1 documents (ranked)
+score  1 doc  6: http://old-www.cs.dartmouth.edu/~cs50/data/tse/wikipedia/C_(programming_language).html
+-----------------------------------------------------------------------------------------------------------------------
+Query: memnode atomic and hundred otherunix interconnecting terabits 
+Matches 0 documents (ranked)
+-----------------------------------------------------------------------------------------------------------------------
+Query: embroiders runs and bringing or smoker carnival 
+Matches 0 documents (ranked)
+-----------------------------------------------------------------------------------------------------------------------
+Query: harries creation 
+Matches 1 documents (ranked)
+score  1 doc  3: http://old-www.cs.dartmouth.edu/~cs50/data/tse/wikipedia/Hash_table.html
+-----------------------------------------------------------------------------------------------------------------------
+Query: neal enough or emory 
+Matches 1 documents (ranked)
+score  1 doc  4: http://old-www.cs.dartmouth.edu/~cs50/data/tse/wikipedia/Dartmouth_College.html
+-----------------------------------------------------------------------------------------------------------------------
+Query: healthiest proficiency and your 
+Matches 0 documents (ranked)
+-----------------------------------------------------------------------------------------------------------------------
+Query: cardiovascular scholarship requirements 
+Matches 0 documents (ranked)
+-----------------------------------------------------------------------------------------------------------------------
+Query: attribution union or position advantage or famnode and linking 
+Matches 4 documents (ranked)
+score  6 doc  2: http://old-www.cs.dartmouth.edu/~cs50/data/tse/wikipedia/Linked_list.html
+score  3 doc  3: http://old-www.cs.dartmouth.edu/~cs50/data/tse/wikipedia/Hash_table.html
+score  1 doc  4: http://old-www.cs.dartmouth.edu/~cs50/data/tse/wikipedia/Dartmouth_College.html
+score  1 doc  6: http://old-www.cs.dartmouth.edu/~cs50/data/tse/wikipedia/C_(programming_language).html
 -----------------------------------------------------------------------------------------------------------------------
 
 

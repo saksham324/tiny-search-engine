@@ -1,5 +1,6 @@
 *.o
 querier
 fuzzquery
+unittest
 *core*
 .nfs*

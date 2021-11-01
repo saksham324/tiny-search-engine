@@ -15,14 +15,21 @@ fuzzquery: fuzzquery.o
 	$(CC) $(CFLAGS) $^ $(LLIBS) -o $@
 
 # Phony Targets
-.PHONY: clean test valgrind
+.PHONY: clean test valgrind unittest unit
+
+unittest: querier.o
+	$(CC) $(CFLAGS) -DEBUG querier.o $(LLIBS) -o unittest
+
+unit: unittest
+	./unittest
 
 clean:
 	rm -f core *core.*
 	rm -f querier fuzzquery *~ *.o
+	rm -f unittest
 
 test: 
 	bash -v testing.sh
 
 valgrind:
-	echo review home | valgrind ./querier ../tse-output/toscrape-depth-1 ../indexer/toscrape-depth-1-index
+	echo review home | valgrind ./querier ../tse-output/toscrape-depth-1 ../indexer/toscrape-index-1

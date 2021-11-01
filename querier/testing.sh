@@ -13,6 +13,8 @@ cc=./querier
 fuzz=./fuzzquery
 pagedir=../tse-output/toscrape-depth-1
 index=../tse-output/toscrape-index-1
+pagedir1=../tse-output/wikipedia-depth-1
+index1=../tse-output/wikipedia-index-1
 
 # wrong pageDirectory
 $cc ../crawler $index
@@ -37,6 +39,8 @@ echo home review and | $cc $pagedir $index
 
 # fuzzquery
 $fuzz $index 21 0 | $cc $pagedir $index
+
+$fuzz $index1 16 2 | $cc $pagedir1 $index1
 
 
 
