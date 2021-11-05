@@ -1,6 +1,6 @@
 # Grader: Chahak Goyal
 
-## Total Score: 84/100    
+## Total Score: 84/100 + 1 = 85/100  
 
 ### Overall: 10/10  
 
@@ -49,7 +49,7 @@
 
 ### Overall deductions:
 
-* -5 for no unit testing  
+* -5 for no unit testing (updated by TP to -4 for no unit tests)
 
 
 
